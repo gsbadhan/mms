@@ -13,4 +13,4 @@ curl -XGET 'localhost:9200/theatre/_search?size=100&pretty'
 
 
 
-![Screenshot](https://github.com/gsbadhan/mms/blob/main/architecture-overview.png)
+![Screenshot](https://github.com/gsbadhan/mms/blob/52671d5cb33a3bfb37e696a38799cabae4201cee/architecture-overview.png)
