@@ -1,0 +1,11 @@
+
+# swagger UI URL
+http://localhost:9090/swagger-ui/index.html
+
+# Monitoring URL
+http://localhost:9090/actuator/health
+
+# Elasticsearch UI
+http://localhost:9200/_stats
+http://localhost:9200/theatre
+curl -XGET 'localhost:9200/theatre/_search?size=100&pretty'
