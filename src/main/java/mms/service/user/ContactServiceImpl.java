@@ -9,10 +9,13 @@ import mms.pubsub.message.UserDetailMessage;
 import mms.pubsub.queue.UserDetailPublisherUserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional(isolation = Isolation.SERIALIZABLE)
 public class ContactServiceImpl implements ContactService {
     @Autowired
     private CustomerRepository customerRepository;

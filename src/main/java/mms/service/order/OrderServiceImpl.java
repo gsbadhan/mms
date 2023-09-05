@@ -21,8 +21,11 @@ import mms.utils.Common;
 import mms.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(isolation = Isolation.SERIALIZABLE)
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private CartService cartService;
