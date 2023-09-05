@@ -324,3 +324,4 @@ create table `customer`(
  unique index idx_unq_phnum (`phone_number`)
  );
 
+
