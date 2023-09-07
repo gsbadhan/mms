@@ -164,26 +164,26 @@ insert into `tax_class` (`id`,`name`,`cgst_prcntg`,`sgst_prcntg`,`gst_prcntg`,`o
 -- use mms_cart;
 
 
-select * from seat_lock_0;
-select * from seat_lock_1;
-select * from seat_lock_2;
 
 /* create seat_lock_1 to seat_lock_..N */
 create table `seat_lock_0`(
 `id` BigInt(15), /*show_id and seat_id*/
 `insert_time` time not null, /* hh:mm:ss */
+`lock_owner` varchar(45) not null, /* cart_id is lock owner */
 primary key (`id`)
 );
 
 create table `seat_lock_1`(
 `id` BigInt(15), /*show_id and seat_id*/
 `insert_time` time not null, /* hh:mm:ss */
+`lock_owner` varchar(45) not null, /* cart_id is lock owner */
 primary key (`id`)
 );
 
 create table `seat_lock_2`(
 `id` BigInt(15), /*show_id and seat_id*/
 `insert_time` time not null, /* hh:mm:ss */
+`lock_owner` varchar(45) not null, /* cart_id is lock owner */
 primary key (`id`)
 );
 
@@ -218,7 +218,7 @@ create table `order_detail`(
  );
 
 create table `orders`(
-`id` bigint auto_increment, /* order transaction id */
+`id` bigint auto_increment, /* order id */
 `ordr_dtl_id` integer not null,
 `next_action` tinyint not null, /* 1- initiatePayment, 2- paymentConfirmation, 3- none */
 `order_payment_id` varchar(30), /* payment trx id of order */

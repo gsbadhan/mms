@@ -55,7 +55,7 @@ public class CartServiceImpl implements CartService {
         cartOperations.verifyCart(cartDetail);
         cartOperations.computeBill(cartDetail);
         try {
-            seatLockRepository.blockSeat(cartDetail.getShowId(), cartDetail.getSeats());
+            seatLockRepository.blockSeat(cartDetail.getShowId(), cartDetail.getSeats(), cartDetail.getCartId());
         } catch (SeatNotAvailableException snae) {
             seatLockRepository.unblockSeat(cartDetail.getShowId(), cartDetail.getSeats());
             throw snae;

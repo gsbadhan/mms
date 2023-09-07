@@ -2,6 +2,7 @@ package mms.dao.cart;
 
 import com.google.common.collect.Sets;
 import mms.exception.SeatNotAvailableException;
+import mms.utils.Common;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +31,9 @@ class SeatLockRepositoryImplTestIT {
     @Test
     void blockSeat() throws SeatNotAvailableException {
         Integer showId = 1;
+        String lockOwner = Common.getCartId();
         Set<Integer> seats = Sets.newHashSet(23, 24, 25);
-        seatLockRepository.blockSeat(showId, seats);
+        seatLockRepository.blockSeat(showId, seats, lockOwner);
     }
 
     @Test

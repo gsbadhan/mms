@@ -26,7 +26,7 @@ public class SeatLockRepositoryImpl implements SeatLockRepository {
     private Long totalLocks = null;
 
     @Override
-    public void blockSeat(Integer showId, Set<Integer> seats) throws SeatNotAvailableException {
+    public void blockSeat(Integer showId, Set<Integer> seats, String lockOwner) throws SeatNotAvailableException {
         Set<Integer> seatAllocated = new HashSet<>(seats.size());
         Integer seatNotAvailable = null;
         for (Integer seatId : seats) {
@@ -34,9 +34,10 @@ public class SeatLockRepositoryImpl implements SeatLockRepository {
             BigInteger lockId = getLockId(showId, seatId);
             boolean seatLocked = true;
             StringBuilder queryBuilder = new StringBuilder("insert into ").append(getTableName(showId, seatId, lockId)).
-                    append(" (id, insert_time) ").append("values (?,?)");
+                    append(" (id, insert_time, lock_owner) ").append("values (?,?,?)");
             try {
-                jdbcTemplate.update(queryBuilder.toString(), new Object[]{lockId, new Time(System.currentTimeMillis())});
+                jdbcTemplate.update(queryBuilder.toString(), new Object[]{lockId,
+                        new Time(System.currentTimeMillis()), lockOwner});
             } catch (DuplicateKeyException dupExp) {
                 seatNotAvailable = seatId;
                 break;
@@ -72,7 +73,7 @@ public class SeatLockRepositoryImpl implements SeatLockRepository {
      * @return
      */
     protected BigInteger getLockId(Integer showId, Integer seatId) {
-        BigInteger lockId = new BigInteger(new StringBuilder(showId).append("000").append(seatId).toString());
+        BigInteger lockId = new BigInteger(new StringBuilder().append(showId).append("000").append(seatId).toString());
         return lockId;
     }
 
